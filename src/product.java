@@ -1,3 +1,4 @@
+import java.io.PrintWriter;
 import java.sql.*;
 import java.util.Scanner;
 
@@ -5,25 +6,33 @@ import java.util.Scanner;
 public class product{
 	
 	public product(){}
+	
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	static final String DB_URL = "jdbc:mysql://localhost/nb";
+	static final String DB_URL1 = "jdbc:mysql://localhost/orders";
 	static final String USER = "root";
 	static final String PASSWORD = "consulting";
-		public void ReadDatabase(){
+		public void ReadDatabase( int customerID){
+			int arrayelement = customerID - 1;
 			Connection conn = null;
 			Statement stmt = null;
+			Connection conn1 = null;
+			Statement stmt1 = null;
 			
 	try {
 		Class.forName("com.mysql.jdbc.Driver");
-		System.out.println("Connecting to database...");
+		System.out.println("Connecting to database NB ...");
 		conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+		conn1 = DriverManager.getConnection(DB_URL1, USER, PASSWORD);
 		
 		System.out.println("Creating statement...");
 		stmt = conn.createStatement();
+		stmt1 = conn1.createStatement();
 		String sq12 = "SELECT idproducts, product_name, keywords, num_stock, price FROM products";
 		ResultSet rs = stmt.executeQuery(sq12);
+		String sq13 = "SELECT Customer_Registration_Number, Delivery_Address, Product_ID, Product_Name, Number_wanted, Cost FROM orders";
+		ResultSet rs1 = stmt1.executeQuery(sq13);
 		boolean ordering = true;
-
 		while(ordering == true){
 			boolean product_found = false;
 		System.out.println("Do you want to search for the order by product number, product name or by keywords?");
@@ -93,7 +102,19 @@ public class product{
 	}
 		if(product_found == true){
 		System.out.println("Please type the product ID number of the product you want");
-			
+		int prod_id = scan8.nextInt();
+		while (rs.next()) {
+			int id = rs.getInt("idproducts");
+			if(id == prod_id){
+				product_found = true;
+			String product_name = rs.getString("product_name");
+			String keywords = rs.getString("keywords");
+			int num_stock = rs.getInt("num_stock");
+			float price = rs.getFloat("price");
+			System.out.println("ID: " + id + ", product name: " + product_name + ", keyword: "
+					+ keywords + ", num_stock: " + num_stock + " and price: " + price);
+			}
+		}
 			{
 		}
 		System.out.println("Do you wish to add another item to your order or try again?");

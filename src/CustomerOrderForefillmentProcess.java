@@ -5,8 +5,7 @@ public class CustomerOrderForefillmentProcess {
 	{
 		
 		int currentID= -1;
-		product prod = new product();
-		prod.ReadDatabase();
+		
 		System.out.println("Hello NB Gardens, Are you are registered Customer?");
 		Scanner scanIn = new Scanner(System.in);
 		String isRegistered = scanIn.nextLine();
@@ -26,6 +25,9 @@ public class CustomerOrderForefillmentProcess {
 			UpdateDetails update = new UpdateDetails();
 			update.updateDetails(currentID);
 		}
+		
+		product prod = new product();
+		prod.ReadDatabase(currentID);
 
 		}
 		
