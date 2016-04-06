@@ -92,6 +92,8 @@ public class product{
 		System.out.println("Error incorrect search parameter typed");
 	}
 		if(product_found == true){
+		System.out.println("Please type the product ID number of the product you want");
+			
 			{
 		}
 		System.out.println("Do you wish to add another item to your order or try again?");
