@@ -99,7 +99,7 @@ public class product{
 		if(answer.equalsIgnoreCase("yes")){
 			System.out.println("More orders being placed");
 		} else {
-				ordering = false;
+				ordering = false
 			}
 		}
 		}
