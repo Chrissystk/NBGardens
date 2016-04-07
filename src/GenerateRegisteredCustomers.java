@@ -9,13 +9,13 @@ public class GenerateRegisteredCustomers {
 	private ArrayList<Customer> customers = new ArrayList<Customer>();
 	
 	private GenerateRegisteredCustomers(){
-		addCustomer(new Customer("Miss", "Anna", "Smith", "M252BH", "33 Garden Road, Manchester", "M252BH", "33 Garden Road, Manchester", "15/12/1991", "ASmith@email.com", "01617231845"));
+		addCustomer(new Customer("Miss", "Anna", "Smith", "M252BH", "33 Garden Road Manchester", "M252BH", "33 Garden Road, Manchester", "15/12/1991", "ASmith@email.com", "01617231845"));
 		customers.get(0).setAccountNumber(1);
 		customers.get(0).setCredit(250.00);
-		addCustomer(new Customer("Mrs", "Chloe", "Tree", "B112SA", "65 St Annes Road, Birmingham", "B104QA", "101 Systems Close, Birmingham", "21/06/1982", "CTree@email.com", "01772312849"));
+		addCustomer(new Customer("Mrs", "Chloe", "Tree", "B112SA", "65 St Annes Road Birmingham", "B104QA", "101 Systems Close, Birmingham", "21/06/1982", "CTree@email.com", "01772312849"));
 		customers.get(1).setAccountNumber(2);
 		customers.get(1).setCredit(571.69);
-		addCustomer(new Customer("Mr", "Andrew", "Hall", "PR76TB", "22 Linden Drive, Preston", "PR76TB", "22 Linden Drive, Preston", "10/01/1964", "None", "07718375271"));
+		addCustomer(new Customer("Mr", "Andrew", "Hall", "PR76TB", "22 Linden Drive Preston", "PR76TB", "22 Linden Drive, Preston", "10/01/1964", "None", "07718375271"));
 		customers.get(2).setAccountNumber(3);
 		customers.get(2).setCredit(1000.00);
 		
@@ -112,9 +112,20 @@ public class GenerateRegisteredCustomers {
 		
 			System.out.println(customers.get(i).toString());
 	}
+	public String get_delivery_address(int i){
+		String del_address = customers.get(i).getDeliveryAddress();
+	
+		return del_address;
+		
+	}
 	
 	
+	public String get_delivery_postcode(int i){
+		String del_postcode = customers.get(i).getDeliverPostcode();
 	
+		return del_postcode;
+		
+	}
 	
 	
 	
