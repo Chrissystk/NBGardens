@@ -93,6 +93,10 @@ public class GenerateRegisteredCustomers {
 	public void updateCustomerPhone(int accountnum, String phone){
 		customers.get(accountnum).setPhone(phone);
 	}
+	public void updateCustomerCredit(int accountnum, double credit){
+		customers.get(accountnum).setCredit(credit);
+	
+	}
 
 	
 	private Customer setAccountNo(Customer customer) {
@@ -127,7 +131,11 @@ public class GenerateRegisteredCustomers {
 		
 	}
 	
-	
+	public double get_credit_limit(int i){
+		double credit = customers.get(i).getCredit();
+		
+		return credit;
+	}
 	
 	public int size(){
 		return customers.size();
