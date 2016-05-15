@@ -18,6 +18,7 @@ public class FindRegisteredCustomersDetails {
 					.getGenerateRegisteredCustomers().findByAccountNumber(
 							accountNumber);
 			System.out.println(customerID.toString());
+			scan2.close();
 			return customerID.getAccountNumber();
 		}
 		System.out.println("Can I take your postcode please?");
@@ -32,10 +33,12 @@ public class FindRegisteredCustomersDetails {
 		System.out.println("Using Name" + customerName.toString());
 		System.out.println(customerName);
 		System.out.println(customerpostcode);
+		scan2.close();
 		if (customerName.equals(customerpostcode)) {
 			System.out.println("Account found check they are up todate");
 			return customerName.getAccountNumber();
 		}
+	
 		System.out.println("No account found");
 		return -1;
 	}

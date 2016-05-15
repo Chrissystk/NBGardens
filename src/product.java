@@ -1,5 +1,6 @@
-import java.io.PrintWriter;
+
 import java.sql.*;
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 
@@ -7,8 +8,8 @@ public class product{
 	
 	public void product(Customer customer){
 		GenerateRegisteredCustomers.getGenerateRegisteredCustomers();
-	}
 	
+	}
 	
 	public int prod_id, stock_num;
 	public float prod_price;
@@ -16,18 +17,18 @@ public class product{
 	boolean orderplaced = false;
 	public float total_cost = 0;
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	static final String DB_URL = "jdbc:mysql://localhost/nb";
+	static final String DB_URL = "jdbc:mysql://localhost/products";
 	static final String DB_URL1 = "jdbc:mysql://localhost/orders";
 	static final String USER = "root";
-	static final String PASSWORD = "consulting";
+	static final String PASSWORD = "Callash0825";
 		public void ReadDatabase( int customerID){
 			int arrayelement = customerID - 1;
-		String del_address = GenerateRegisteredCustomers.getGenerateRegisteredCustomers().get_delivery_address(arrayelement);
-		String del_postcode = GenerateRegisteredCustomers.getGenerateRegisteredCustomers().get_delivery_postcode(arrayelement);
+	//	String del_address = GenerateRegisteredCustomers.getGenerateRegisteredCustomers().get_delivery_address(arrayelement);
+	//	String del_postcode = GenerateRegisteredCustomers.getGenerateRegisteredCustomers().get_delivery_postcode(arrayelement);
 			Connection conn = null;
 			Statement stmt = null;
 			Connection conn1 = null;
-			Statement stmt1 = null;
+	//		Statement stmt1 = null;
 			
 	try {
 		Class.forName("com.mysql.jdbc.Driver");
@@ -37,7 +38,7 @@ public class product{
 		
 		System.out.println("Creating statement...");
 		stmt = conn.createStatement();
-		stmt1 = conn1.createStatement();
+//		stmt1 = conn1.createStatement();
 		String sq12 = "SELECT idproducts, product_name, keywords, num_stock, price  FROM products";
 		
 		
@@ -157,16 +158,20 @@ public class product{
 				System.out.println("How many do you want to order?");
 				int amount_order = scan8.nextInt();
 				float cost = amount_order * prod_price;
-				int stock_now  = stock_num - amount_order;
+	//			int stock_now  = stock_num - amount_order;
+				
+//				addOrder(new Payment(prod_id, name_prod, amount_order, cost));
+				
+	//			GenerateOrderList.getgenerateorderlist().TotalCost();
 				
 				//String sq14 = "UPDATE nb.products SET num_stock = " + stock_now + "WHERE product_ID = " + id;
-				String sq13 = "INSERT INTO orders.orders " + "VALUES (" + customerID + ", '" + del_postcode + "', '" + del_address + "', " + prod_id + ", '" + name_prod + "', " + amount_order + ", " + cost + ")";
-				String sq14 = "update nb.products set num_stock = '"+ stock_now + "' where idproducts = " + prod_id;
+	//			String sq13 = "INSERT INTO orders.orders " + "VALUES (" + customerID + ", '" + del_postcode + "', '" + del_address + "', " + prod_id + ", '" + name_prod + "', " + amount_order + ", " + cost + ")";
+	//			String sq14 = "update products.products set num_stock = '"+ stock_now + "' where idproducts = " + prod_id;
 	
-				stmt.executeUpdate(sq14);
-				stmt1.executeUpdate(sq13);
+	//			stmt.executeUpdate(sq14);
+	//			stmt1.executeUpdate(sq13);
 				
-				total_cost = total_cost + cost;
+			
 				System.out.println("Do you want to place another order?");
 				String answer = scan7.next();
 				if(answer.equalsIgnoreCase("yes")){
@@ -184,28 +189,31 @@ public class product{
 		System.out.println("Do you wish to try again?");
 		String answer = scan7.next();
 		if(answer.equalsIgnoreCase("yes")){
-			System.out.println("Please try again");
-		} else {
 				ordering = false;
 				conn.close();
 				conn1.close();
 			}
 		}
-		
+		scan7.close();
+		scan8.close();
+		scan9.close();
 	}
-	
+
 	}
 	catch(SQLException | ClassNotFoundException sqle){
 		sqle.printStackTrace();
 	}	catch (Exception e) {
 		e.printStackTrace();
 	}
-	 System.out.println("The total cost of your order is £" + total_cost);
+	DecimalFormat df = new DecimalFormat("#.##");
+	df.format(total_cost);
+	 System.out.println("The total cost of your order is Â£" + total_cost);
 		GenerateRegisteredCustomers.getGenerateRegisteredCustomers();
 		double credit = GenerateRegisteredCustomers.getGenerateRegisteredCustomers().get_credit_limit(arrayelement);
-		System.out.println("You currently have £" + credit );
+		System.out.println("You currently have Â£" + credit );
 			credit = credit - total_cost;
-			System.out.println("Your remaining credit is now £" + credit);
+			System.out.println("Your remaining credit is now Â£");
+			System.out.format("%.2f%n", credit);
 			
 		}
 

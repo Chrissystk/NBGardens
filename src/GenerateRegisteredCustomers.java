@@ -106,6 +106,7 @@ public class GenerateRegisteredCustomers {
 		return customer;
 	}
 	
+	@SuppressWarnings("unused")
 	private void creditadd(Customer customer){
 		int accountNumber = customers.size();
 		customers.get(accountNumber).setCredit(0.00);

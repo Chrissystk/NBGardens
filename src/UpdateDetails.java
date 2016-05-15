@@ -136,5 +136,7 @@ public class UpdateDetails {
 			}
 		}
 		}
+		scan3.close();
+		scan4.close();
 	}
 }
